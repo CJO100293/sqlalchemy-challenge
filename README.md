@@ -32,7 +32,8 @@ Now that you’ve completed your initial analysis, you’ll design a Flask API b
 
 ## **Sources:**
 ### **Part 1:**
-- The basis for the code used in the "# Use Pandas to calculate the summary statistics for the precipitation data" portion of the "Exploratory Precipitation Analysis" section in "/SurfsUp/climate_starter.ipynb" was found from https://www.w3schools.com/python/pandas/ref_df_describe.asp
-- Some of the basis for the code used in the "Design a query to find the most active stations (i.e. which stations have the most rows?) List the stations and their counts in descending order." portion of the "Exploratory Station Analysis" section in "/SurfsUp/climate_starter.ipynb" was found from https://www.geeksforgeeks.org/python-sqlalchemy-func-count-with-filter/
+- The basis for the code used in the "# Use Pandas to calculate the summary statistics for the precipitation data" portion of the "Exploratory Precipitation Analysis" section in "/SurfsUp/hawaii_climate_analysis.ipynb" was found from https://www.w3schools.com/python/pandas/ref_df_describe.asp
+- Some of the basis for the code used in the "Design a query to find the most active stations (i.e. which stations have the most rows?) List the stations and their counts in descending order." portion of the "Exploratory Station Analysis" section in "/SurfsUp/hawaii_climate_analysis.ipynb" was found from https://www.geeksforgeeks.org/python-sqlalchemy-func-count-with-filter/
+- Some of the basis for the code used in the "Using the most active station id, query the last 12 months of temperature observation data for this station and plot the results as a histogram" section was found with https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html as well as with some help from Steve Bennett.
 
 ### **Part 2:**

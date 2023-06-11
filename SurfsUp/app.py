@@ -48,16 +48,24 @@ def homepage():
 
 @app.route("/api/v1.0/precipitation")
 def precipitation():
-    date = datetime.datetime.strptime(start, "%y-%m-%d").date()
+# Converting last 12 months of precipitation data to dictionary
+
+# Return the JSON representation of your dictionary.
      
 @app.route("/api/v1.0/stations")
 def stations():
-        
+# Return a JSON list of stations
+    
 @app.route("/api/v1.0/tobs")
 def tobs():
+# Query the dates and temperature observations of the most-active station for the previous year of data.
+
+# Return a JSON list of temperature observations for the previous year.
 
 @app.route("/api/v1.0/<start>")
 def start(start):
-        
+# Return a JSON list of min, avg, max of temperature from a start date
+    
 @app.route("/api/v1.0/<start>/<end>")
 def start_end(start, end):
+# Return a JSON list of min, avg, max of temperature from a start date and end date

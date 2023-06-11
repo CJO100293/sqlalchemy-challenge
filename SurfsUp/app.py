@@ -48,15 +48,16 @@ def homepage():
 
 @app.route("/api/v1.0/precipitation")
 def precipitation():
-    results = session.query(measurement.date, measurement.prcp).\
-    filter(measurement.date >= prev_yr).all()
-    
-    
+    date = datetime.datetime.strptime(start, "%y-%m-%d").date()
+     
 @app.route("/api/v1.0/stations")
 def stations():
         
 @app.route("/api/v1.0/tobs")
 def tobs():
+
+@app.route("/api/v1.0/<start>")
+def start(start):
         
 @app.route("/api/v1.0/<start>/<end>")
 def start_end(start, end):

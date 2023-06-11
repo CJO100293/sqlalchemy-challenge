@@ -65,7 +65,8 @@ def tobs():
 @app.route("/api/v1.0/<start>")
 def start(start):
 # Return a JSON list of min, avg, max of temperature from a start date
-    
+date = datetime.datetime.strptime(start, "%y-%m-%d").date()
+
 @app.route("/api/v1.0/<start>/<end>")
 def start_end(start, end):
 # Return a JSON list of min, avg, max of temperature from a start date and end date

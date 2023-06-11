@@ -37,3 +37,4 @@ Now that you’ve completed your initial analysis, you’ll design a Flask API b
 - Some of the basis for the code used in the "Using the most active station id, query the last 12 months of temperature observation data for this station and plot the results as a histogram" section was found with https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html as well as with some help from Steve Bennett.
 
 ### **Part 2:**
+- https://stackoverflow.com/questions/53460391/passing-a-date-as-a-url-parameter-to-a-flask-route and https://stackoverflow.com/questions/12070193/why-does-trying-to-use-datetime-strptime-result-in-module-object-has-no-at were both used to help with the code used in the "Return a JSON list of min, avg, max of temperature from a start date" and "Return a JSON list of min, avg, max of temperature from a start date and end date" sections

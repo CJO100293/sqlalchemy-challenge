@@ -40,8 +40,10 @@ app = Flask(__name__)
 # Flask Routes
 #################################################
 
+# Homepage Route Section
 @app.route("/")
 def homepage():
+    session.close()
     return (
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
@@ -51,9 +53,11 @@ def homepage():
         f"/api/v1.0/<start>/<end><br/>"
     )
 
+# Precipitation Route Section
 @app.route("/api/v1.0/precipitation")
 def precipitation():
 # Converting last 12 months of precipitation data to dictionary
+    session = Session(engine)
     prev_yr = dt.date(2017, 8, 23) - dt.timedelta(days=365)
     results = session.query(measurement.date, measurement.prcp).filter(measurement.date >= prev_yr).all()
 
@@ -64,20 +68,26 @@ def precipitation():
         prcp_results.append(results_dict)
 
 # Return the JSON representation of your dictionary.
+    session.close()
     return jsonify(prcp_results) 
 
+# Stations Route Section
 @app.route("/api/v1.0/stations")
 def stations():
 # Return a JSON list of stations
+    session = Session(engine)
     query_act_stations = session.query(measurement.station, func.count(measurement.station)).\
                     group_by(measurement.station).\
                     order_by(func.count(measurement.station).desc()).all()
     station_list = list(np.ravel(query_act_stations))
+    session.close()
     return jsonify(station_list)
 
+# Tobs Route Section
 @app.route("/api/v1.0/tobs")
 def tobs():
 # Query the dates and temperature observations of the most-active station for the previous year of data.
+    session = Session(engine)
     prev_yr = dt.date(2017, 8, 23) - dt.timedelta(days=365)
     results = session.query(measurement.date, measurement.prcp).filter(measurement.date >= prev_yr).all()
     query_act_stations = session.query(measurement.station, func.count(measurement.station)).\
@@ -91,20 +101,26 @@ def tobs():
         tobs_results_dict = {}
         tobs_results_dict[date] = tobs
         tobs_results_dict.append(tobs_results_dict)
-
+    session.close()
     return jsonify(tobs_results)
 
 # Return a JSON list of temperature observations for the previous year.
+
+
+# Start Route Section
 
 #@app.route("/api/v1.0/<start>")
 #def start(start):
 # Return a JSON list of min, avg, max of temperature from a start date
     #date = dt.datetime.strptime(start, "%y-%m-%d").date()
 
+
+
+
+# Start/End Route Section
 #@app.route("/api/v1.0/<start>/<end>")
 #def start_end(start, end):
 # Return a JSON list of min, avg, max of temperature from a start date and end date
-
 
 
 

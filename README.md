@@ -38,4 +38,4 @@ Now that you’ve completed your initial analysis, you’ll design a Flask API b
 
 ### **Part 2:**
 - the code used with the flask escape function used in the "Homepage Route Section" was found from https://tedboy.github.io/flask/generated/flask.escape.html.
-- https://stackoverflow.com/questions/53460391/passing-a-date-as-a-url-parameter-to-a-flask-route and https://stackoverflow.com/questions/12070193/why-does-trying-to-use-datetime-strptime-result-in-module-object-has-no-at were both used to help with the code used in the "Return a JSON list of min, avg, max of temperature from a start date" and "Return a JSON list of min, avg, max of temperature from a start date and end date" sections.
+- https://stackoverflow.com/questions/53460391/passing-a-date-as-a-url-parameter-to-a-flask-route and https://stackoverflow.com/questions/12070193/why-does-trying-to-use-datetime-strptime-result-in-module-object-has-no-at were both used to help with the code used in the "Adding error exceptions" portion of the "Start Route Section" section.

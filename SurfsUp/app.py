@@ -53,7 +53,8 @@ def homepage():
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
         f"/api/v1.0/{escape('<start>')}<br/>"
-        f"/api/v1.0/{escape('<start>/<end>')}"
+        f"/api/v1.0/{escape('<start>/<end>')}<br/><br/>"
+        f"Make sure dates for {escape('<start> and <end>')} are in the 'YYYY-MM-DD' format"
     )
 
 #############################
@@ -140,18 +141,18 @@ def start(start):
     session = Session(engine)
 
 # Querying list of min, avg, max of temperature from a start date onward
-    date = dt.datetime.strptime(start, "%Y-%m-%d").date()
-    dateinfo = date = dt.timedelta(days=365)
-    results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date >= dateinfo).first()
-
+    sel = [func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)]
+    results = (session.query(*sel)
+            .filter(func.strftime("%Y-%m-%d", measurement.date) >= start)
+            .all())
 # Closing session
     session.close()
-
+    
 # Convert list of tuples into normal list
-    start_date_results = list (np.ravel(results))
+    data = list(np.ravel(results))
 
 # Return a JSON list of min, avg, max of temperature from a start date and end date
-    return jsonify(start_date_results)
+    return jsonify(data)
 
 #########################
 #Start/End Route Section#
@@ -161,27 +162,20 @@ def start_end(start, end):
 # Create our session (link) from Python to the DB
     session = Session(engine)
 
-# Querying list of min, avg, max of temperature from a start date onward
-    sel = [measurement.date, func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)]
+# Querying list of min, avg, max of temperature from a start date and end date
+    sel = [func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)]
     results = (session.query(*sel)
             .filter(func.strftime("%Y-%m-%d", measurement.date) >= start)
             .filter(func.strftime("%Y-%m-%d", measurement.date) <= end)
-            .group_by(measurement.date)
             .all())
-    dates = []
-    for result in results:
-            date_dict = {}
-            date_dict["Date"] = result[0]
-            date_dict["Low Temp"] = result[1]
-            date_dict["Avg Temp"] = result[2]
-            date_dict["High Temp"] = result[3]
-            dates.append(date_dict)
-
 # Closing session
     session.close()
 
+# Convert list of tuples into normal list
+    data = list(np.ravel(results))
+
 # Return a JSON list of min, avg, max of temperature from a start date and end date
-    return jsonify(dates)
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)

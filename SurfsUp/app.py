@@ -145,6 +145,7 @@ def start(start):
     results = (session.query(*sel)
             .filter(func.strftime("%Y-%m-%d", measurement.date) >= start)
             .all())
+    
 # Closing session
     session.close()
     
@@ -168,6 +169,7 @@ def start_end(start, end):
             .filter(func.strftime("%Y-%m-%d", measurement.date) >= start)
             .filter(func.strftime("%Y-%m-%d", measurement.date) <= end)
             .all())
+    
 # Closing session
     session.close()
 

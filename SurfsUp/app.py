@@ -7,7 +7,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from sqlalchemy import func
-from flask import Flask, jsonify
+from flask import Flask, jsonify, escape
 
 #################################################
 # Database Setup
@@ -49,8 +49,8 @@ def homepage():
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/<start><br/>"
-        f"/api/v1.0/<start>/<end><br/>"
+        f"/api/v1.0/{escape('<start>')}<br/>"
+        f"/api/v1.0/{escape('<start>/<end>')}<br/>"
     )
 
 # Precipitation Route Section
@@ -100,19 +100,25 @@ def tobs():
     for date, tobs in results:
         tobs_results_dict = {}
         tobs_results_dict[date] = tobs
-        tobs_results_dict.append(tobs_results_dict)
     session.close()
-    return jsonify(tobs_results)
+    print(tobs_results_dict)
+    return jsonify(tobs_results_dict)
 
 # Return a JSON list of temperature observations for the previous year.
 
 
 # Start Route Section
 
-#@app.route("/api/v1.0/<start>")
-#def start(start):
+@app.route("/api/v1.0/<start>")
+def start(start):
+
 # Return a JSON list of min, avg, max of temperature from a start date
-    #date = dt.datetime.strptime(start, "%y-%m-%d").date()
+
+
+
+
+
+#date = dt.datetime.strptime(start, "%y-%m-%d").date()
 
 
 

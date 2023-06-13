@@ -30,6 +30,13 @@ In this section, you’ll use Python and SQLAlchemy to do a basic climate analys
 **Part 2: Design Your Climate App**
 Now that you’ve completed your initial analysis, you’ll design a Flask API based on the queries that you just developed. To do so, use Flask to create your routes.
 
+## **Instructions:**
+when trying to gather temperature data from a date or range of dates under the "/api/v1.0/<start>" or "/api/v1.0/<start>/<end>" routes make sure the date formats are in YYYY-MM-DD. 
+	examples: 
+	2015-05-30 or 2015-02-2 if the day is a single digit day in the date.
+	/api/v1.0/2015-05-30
+	/api/v1.0/2015-05-30/2016-01-30
+
 ## **Sources:**
 ### **Part 1:**
 - The basis for the code used in the "# Use Pandas to calculate the summary statistics for the precipitation data" portion of the "Exploratory Precipitation Analysis" section in "/SurfsUp/hawaii_climate_analysis.ipynb" was found from https://www.w3schools.com/python/pandas/ref_df_describe.asp

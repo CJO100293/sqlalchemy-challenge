@@ -139,13 +139,8 @@ def start(start):
 # Create our session (link) from Python to the DB
     session = Session(engine)
 
-# Adding error exceptions
-    try:
-        date = dt.datetime.strptime(start, "%Y-%m-%d").date()
-    except ValueError:
-        date = dt.datetime.strptime(start, "%y-%m-%d").date()
-
 # Querying list of min, avg, max of temperature from a start date onward
+    date = dt.datetime.strptime(start, "%Y-%m-%d").date()
     dateinfo = date = dt.timedelta(days=365)
     results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date >= dateinfo).first()
 
@@ -161,19 +156,32 @@ def start(start):
 #########################
 #Start/End Route Section#
 #########################
-#@app.route("/api/v1.0/<start>/<end>")
-#def start_end(start, end):
+@app.route("/api/v1.0/<start>/<end>")
+def start_end(start, end):
 # Create our session (link) from Python to the DB
-#    session = Session(engine)
+    session = Session(engine)
 
 # Querying list of min, avg, max of temperature from a start date onward
-
+    sel = [measurement.date, func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)]
+    results = (session.query(*sel)
+            .filter(func.strftime("%Y-%m-%d", measurement.date) >= start)
+            .filter(func.strftime("%Y-%m-%d", measurement.date) <= end)
+            .group_by(measurement.date)
+            .all())
+    dates = []
+    for result in results:
+            date_dict = {}
+            date_dict["Date"] = result[0]
+            date_dict["Low Temp"] = result[1]
+            date_dict["Avg Temp"] = result[2]
+            date_dict["High Temp"] = result[3]
+            dates.append(date_dict)
 
 # Closing session
-#    session.close()
+    session.close()
 
 # Return a JSON list of min, avg, max of temperature from a start date and end date
-
+    return jsonify(dates)
 
 if __name__ == '__main__':
     app.run(debug=True)

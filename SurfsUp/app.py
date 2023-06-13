@@ -54,7 +54,8 @@ def homepage():
         f"/api/v1.0/tobs<br/>"
         f"/api/v1.0/{escape('<start>')}<br/>"
         f"/api/v1.0/{escape('<start>/<end>')}<br/><br/>"
-        f"Make sure dates for {escape('<start> and <end>')} are in the 'YYYY-MM-DD' format"
+        f"Make sure dates for {escape('<start> and <end>')} are in the 'YYYY-MM-DD' format<br/>"
+        f"example routes to try for {escape('<start> and <end>')} are /api/v1.0/2015-05-30 or /api/v1.0/2015-05-30/2016-01-30"
     )
 
 #############################

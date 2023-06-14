@@ -180,5 +180,6 @@ def start_end(start, end):
 # Return a JSON list of min, avg, max of temperature from a start date and end date
     return jsonify(data)
 
+# allowing execution of code as script
 if __name__ == '__main__':
     app.run(debug=True)
